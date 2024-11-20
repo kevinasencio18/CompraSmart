@@ -4,7 +4,7 @@
 //
 //  Created by MacOsX on 9/17/24.
 //
-
+// asenciok70@gmail.com
 import SwiftUI
 
 struct Menu: View {
@@ -35,13 +35,16 @@ struct Menu: View {
                                  .scaledToFit()
                                 .padding()
                             }
-                        Text("Ofertas Del Día")
-                            .foregroundColor(.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.gray.opacity(0.20))
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .shadow(radius: 5 )
+                        Button(action: {irOfertasDelDia()}){
+                            Text("Ofertas Del Día")
+                                .foregroundColor(.black)
+                                .frame(width: 200, height: 50)
+                                .background(Color.gray.opacity(0.20))
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .shadow(radius: 5 )
+                            }
+                        
                         }
                     //Imagen de encontrar productos
                     HStack{
@@ -52,13 +55,16 @@ struct Menu: View {
                                  .scaledToFit()
                                 .padding()
                             }
-                        Text("Ver Productos")
-                            .foregroundColor(.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.gray.opacity(0.20))
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .shadow(radius: 5 )
+                        Button(action: {irProductos()}){
+                            Text("Ver Productos")
+                                .foregroundColor(.black)
+                                .frame(width: 200, height: 50)
+                                .background(Color.gray.opacity(0.20))
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .shadow(radius: 5 )
+                            }
+                        
                         }
                     //Imagen de Tu carrito
                     HStack{
@@ -69,15 +75,27 @@ struct Menu: View {
                                  .scaledToFit()
                                 .padding()
                             }
-                        Text("Tu Carrito")
-                            .foregroundColor(.black)
-                            .frame(width: 200, height: 50)
-                            .background(Color.gray.opacity(0.20))
-                            .scaledToFit()
-                            .cornerRadius(10)
-                            .shadow(radius: 5 )
+                        Button(action: {irCarrito()}){
+                            Text("Tu Carrito")
+                                .foregroundColor(.black)
+                                .frame(width: 200, height: 50)
+                                .background(Color.gray.opacity(0.20))
+                                .scaledToFit()
+                                .cornerRadius(10)
+                                .shadow(radius: 5 )
+                            }
+                        
                             
                         }
+                    NavigationLink(destination: ListViewProductos(authenticationViewModel: authenticationViewModel), isActive: $isActiveProductos){
+                        EmptyView()
+                    }
+                    NavigationLink(destination: ListViewOfertasDelDia(authenticationViewModel: authenticationViewModel), isActive: $isActiveOfertasDelDia){
+                        EmptyView()
+                    }
+                    NavigationLink(destination: ListViewCarrito(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito){
+                        EmptyView()
+                    }
                     }
                 }//Fin Zstack
             
@@ -94,33 +112,16 @@ struct Menu: View {
     //Navega a Ofertas del dia al dar click en el boton y asi respectivamente
     func irOfertasDelDia(){
         isActiveOfertasDelDia = true
-        NavigationLink(destination: ListViewOfertasDelDia(authenticationViewModel: authenticationViewModel), isActive: $isActiveOfertasDelDia){
-            Text("")
-                .foregroundColor(.clear)
-        }
     }
     func irCarrito(){
         isActiveCarrito = true
-        NavigationLink(destination: ListViewCarrito(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito){
-            Text("")
-                .foregroundColor(.clear)
-        }
     }
     func irProductos(){
         isActiveProductos = true
-        NavigationLink(destination: ListViewProductos(authenticationViewModel: authenticationViewModel), isActive: $isActiveProductos){
-            Text("")
-                .foregroundColor(.clear)
-        }
     }
-        func irLogin(){
-            NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveLogin){
-                Text("")
-                    .foregroundColor(.clear)
-            }
-        }
+}
     
-    }// Menu: View
+// Menu: View
 //COmmit menu
 
 

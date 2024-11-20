@@ -52,25 +52,7 @@ struct ListViewCarrito: View {
                 }
         }
         .navigationBarTitle("Carrito de compras:")
-        .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button(action: {
-                        isActiveMenu = true
-                       irMenu()
-                    },label: {
-                        Image(systemName: "arrow.left")
-                            .background(Color.black)
-                    })
-                }
-            }
             //ext("Total a Pagar: $28.11")
-        }
-    }
-    func irMenu(){
-        
-        NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
-            Text("")
-                .foregroundColor(.clear)
         }
     }
 }

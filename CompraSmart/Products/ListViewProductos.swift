@@ -26,24 +26,6 @@ struct ListViewProductos: View {
             RowViewProduct(product: product)
         }
         .navigationBarTitle("Lista de Productos:")
-        .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button(action: {
-                        isActiveMenu = true
-                       irMenu()
-                    },label: {
-                        Image(systemName: "arrow.left")
-                            .background(Color.black)
-                    })
-                }
-            }
-        }
-    }
-    func irMenu(){
-        
-        NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
-            Text("")
-                .foregroundColor(.clear)
         }
     }
 }

@@ -20,23 +20,6 @@ struct ListViewOfertasDelDia: View {
             RowViewProductOfertas(productOfertas: productOfertas)
         }
         .navigationBarTitle("Ofertas del días:")
-        .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button(action: {
-                        isActiveMenu = true
-                       irMenu()
-                    },label: {
-                        Image(systemName: "arrow.left")
-                            .background(Color.black)
-                    })
-                }
-            }
-        }
-    }
-    func irMenu(){
-        NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
-            Text("")
-                .foregroundColor(.clear)
         }
     }
 }
