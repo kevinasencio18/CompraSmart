@@ -112,7 +112,7 @@ struct Registro: View {
 //                    })
 //                }
 //            }
-            .navigationTitle("Regístrate")
+            .navigationTitle("Registra tu cuenta, ya!!")
             
         }
         

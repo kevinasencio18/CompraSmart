@@ -43,7 +43,7 @@ struct Login: View {
                     
                     Button("Ingresar"){
                         //Autentificar
-                        autentificarUsuario(username: username, password: password)
+                        authenticationViewModel.login(email: username, password: password)
                     }
                     .foregroundColor(.white)
                     .frame(width: 300, height: 50)
@@ -67,30 +67,18 @@ struct Login: View {
                     NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
                         EmptyView()
                     }
-                    
+                    if let messageError = authenticationViewModel.messageError{
+                        Text("\(messageError) ‼️")
+                            .bold()
+                            .font(.body)
+                            .foregroundColor(.red)
+                            .padding(.top, 20)
+                    }
                 }
             }
             .navigationTitle("Bienvenido")
         }
         
-    }
-
-    func autentificarUsuario(username: String, password: String){
-        if username.lowercased() == "asenciok18"{
-            isUsernameIncorrect = false
-            
-            if password.lowercased() == "1234"{
-                isPasswordIncorrect = false
-                
-                //isActivePage = true
-                //Agregar aqui para navegar al inicar el login
-                isActiveMenu = true
-            }else{
-                isPasswordIncorrect = true
-            }
-        }else{
-            isUsernameIncorrect = true
-        }
     }
 
 }
