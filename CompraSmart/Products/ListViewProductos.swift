@@ -1,11 +1,5 @@
-//
-//  ListViewProductos.swift
-//  CompraSmart
-//
-//  Created by MacOsX on 9/17/24.
-//
-
 import SwiftUI
+import FirebaseAuth
 
 private let products = [
     Product(id: 1, name: "Miel", descrip: "Miel de abeja, 250ml", avatar: Image("miel"), avatarName: "miel", precio: 3.33),
@@ -25,14 +19,20 @@ struct ListViewProductos: View {
                 List(products, id: \.id) { product in
                     RowViewProduct(product: product)
                 }
-                NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel)) {
-                    Text("Ver Carrito")
-                        .foregroundColor(.white)
+                if Auth.auth().currentUser != nil {
+                    NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel)) {
+                        Text("Ver Carrito")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.blue)
+                            .cornerRadius(8)
+                    }
+                    .padding()
+                } else {
+                    Text("Inicia sesión para ver tu carrito.")
+                        .foregroundColor(.red)
                         .padding()
-                        .background(Color.blue)
-                        .cornerRadius(8)
                 }
-                .padding()
             }
             .navigationBarTitle("Lista de Productos:")
         }

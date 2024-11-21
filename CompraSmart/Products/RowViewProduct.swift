@@ -1,10 +1,3 @@
-//
-//  RowViewProduct.swift
-//  CompraSmart
-//
-//  Created by MacOsX on 9/17/24.
-//
-
 import SwiftUI
 import FirebaseFirestore
 import FirebaseAuth
@@ -25,16 +18,15 @@ struct RowViewProduct: View {
             }
             Spacer()
             // Botón para agregar al carrito
-                       Button(action: {
-                           addToCart(product: product)
-                       }) {
-                           Image(systemName: "plus.circle")
-                               .resizable()
-                               .foregroundColor(Color.black.opacity(0.6))
-                               .frame(width: 50, height: 50)
-                               .padding(10)
-                       
-                }
+            Button(action: {
+                addToCart(product: product)
+            }) {
+                Image(systemName: "plus.circle")
+                    .resizable()
+                    .foregroundColor(Color.black.opacity(0.6))
+                    .frame(width: 50, height: 50)
+                    .padding(10)
+            }
         }
     }
     
@@ -43,14 +35,32 @@ struct RowViewProduct: View {
             print("Usuario no autenticado")
             return
         }
-        
+
         let db = Firestore.firestore()
-        db.collection("Carrito").addDocument(data: product.toDictionary().merging(["userId": userId]) { _, new in new }) { error in
-            if let error = error {
-                print("Error al agregar al carrito: \(error.localizedDescription)")
-            } else {
-                print("Producto agregado al carrito")
+        db.collection("Carrito")
+            .whereField("userId", isEqualTo: userId)
+            .whereField("id", isEqualTo: product.id)
+            .getDocuments { (snapshot, error) in
+                if let snapshot = snapshot, !snapshot.isEmpty {
+                    // Si el producto ya existe, incrementa la cantidad
+                    for document in snapshot.documents {
+                        document.reference.updateData([
+                            "quantity": FieldValue.increment(Int64(1))
+                        ])
+                    }
+                } else {
+                    // Si no existe, agrégalo con cantidad inicial 1
+                    db.collection("Carrito").addDocument(data: product.toDictionary().merging([
+                        "userId": userId,
+                        "quantity": 1
+                    ]) { _, new in new }) { error in
+                        if let error = error {
+                            print("Error al agregar al carrito: \(error.localizedDescription)")
+                        } else {
+                            print("Producto agregado al carrito")
+                        }
+                    }
+                }
             }
-        }
     }
 }
