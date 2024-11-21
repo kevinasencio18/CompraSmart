@@ -8,24 +8,33 @@
 import SwiftUI
 
 private let products = [
-    Product(id: 1, name: "Miel", descrip: "Miel de abeja, 250ml", avatar: Image("miel"), precio: 3.33),
-    Product(id: 2, name: "Chorizo Toledo", descrip: "Chorizo de pollo, 350g", avatar: Image("chorizoToledo"), precio: 5.52),
-    Product(id: 3, name: "Galleta Oreo", descrip: "Galleta Oreo, 12u", avatar: Image("galletaOreo"), precio: 4.33),
-    Product(id: 4, name: "Mayonesa MCormik", descrip: "Mayonesa MCormik, 350g", avatar: Image("mayonesaMc"), precio: 6.33),
-    Product(id: 5, name: "Pan Bimbo", descrip: "Pan Bimbo blanco, 12u", avatar: Image("panBimbo"), precio: 2.33),
-    Product(id: 6, name: "Quesadilla Sinai", descrip: "Quesadilla Sinai, 300g", avatar: Image("quesadillaSinai"), precio: 0.25)
+    Product(id: 1, name: "Miel", descrip: "Miel de abeja, 250ml", avatar: Image("miel"), avatarName: "miel", precio: 3.33),
+    Product(id: 2, name: "Chorizo Toledo", descrip: "Chorizo de pollo, 350g", avatar: Image("chorizoToledo"), avatarName: "chorizoToledo", precio: 5.52),
+    Product(id: 3, name: "Galleta Oreo", descrip: "Galleta Oreo, 12u", avatar: Image("galletaOreo"), avatarName: "galletaOreo", precio: 4.33),
+    Product(id: 4, name: "Mayonesa MCormik", descrip: "Mayonesa MCormik, 350g", avatar: Image("mayonesaMc"), avatarName: "mayonesaMc", precio: 6.33),
+    Product(id: 5, name: "Pan Bimbo", descrip: "Pan Bimbo blanco, 12u", avatar: Image("panBimbo"), avatarName: "panBimbo", precio: 2.33),
+    Product(id: 6, name: "Quesadilla Sinai", descrip: "Quesadilla Sinai, 300g", avatar: Image("quesadillaSinai"), avatarName: "quesadillaSinai", precio: 0.25)
 ]
 
 struct ListViewProductos: View {
-    @State private var isActiveMenu = false
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
+
     var body: some View {
-        
-        NavigationView{
-        List(products, id: \.id){ product in
-            RowViewProduct(product: product)
-        }
-        .navigationBarTitle("Lista de Productos:")
+        NavigationView {
+            VStack {
+                List(products, id: \.id) { product in
+                    RowViewProduct(product: product)
+                }
+                NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel)) {
+                    Text("Ver Carrito")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                }
+                .padding()
+            }
+            .navigationBarTitle("Lista de Productos:")
         }
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C07B39A2CEFC58600F44ACD /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C07B3992CEFC58600F44ACD /* CartView.swift */; };
 		0C08A5A92C9B3587006C415C /* ListViewCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5A82C9B3587006C415C /* ListViewCarrito.swift */; };
 		0C08A5AE2C9B35C3006C415C /* ListViewOfertasDelDia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5AD2C9B35C3006C415C /* ListViewOfertasDelDia.swift */; };
 		0C08A5B32C9B360B006C415C /* ProductCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5B22C9B360B006C415C /* ProductCarrito.swift */; };
@@ -56,6 +57,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C07B3992CEFC58600F44ACD /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		0C08A5A82C9B3587006C415C /* ListViewCarrito.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCarrito.swift; sourceTree = "<group>"; };
 		0C08A5AD2C9B35C3006C415C /* ListViewOfertasDelDia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewOfertasDelDia.swift; sourceTree = "<group>"; };
 		0C08A5B22C9B360B006C415C /* ProductCarrito.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCarrito.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				0CD068F72C9A0A4800054C01 /* RowViewProduct.swift */,
 				0CD068FC2C9A30B200054C01 /* ListViewProductos.swift */,
 				0CD068F22C9A099400054C01 /* Product.swift */,
+				0C07B3992CEFC58600F44ACD /* CartView.swift */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				0C1E13442CEBCD03007011A2 /* AuthenticationViewModel.swift in Sources */,
 				0CD068FD2C9A30B200054C01 /* ListViewProductos.swift in Sources */,
 				0C1D2A132C98B4F100B08865 /* Login.swift in Sources */,
+				0C07B39A2CEFC58600F44ACD /* CartView.swift in Sources */,
 				0C1D29E72C98B3E200B08865 /* ContentView.swift in Sources */,
 				0C08A5A92C9B3587006C415C /* ListViewCarrito.swift in Sources */,
 				0C08A5CD2C9B4D63006C415C /* RegistrarTargeta.swift in Sources */,
