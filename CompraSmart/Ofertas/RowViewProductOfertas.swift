@@ -6,33 +6,70 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseAuth
 
 struct RowViewProductOfertas: View {
-    var productOfertas: ProductOfertas
+    var product: Product
+
     var body: some View {
-        HStack{
-            productOfertas.avatar
+        HStack {
+            product.avatar
                 .resizable()
                 .frame(width: 100, height: 100)
                 .padding(10)
-            VStack(alignment: .leading){
-                Text(productOfertas.name).font(.title)
-                Text(productOfertas.descrip).font(.subheadline).foregroundColor(.red)
-                Text("$ \(String(format: "%0.2f",productOfertas.precio))").font(.subheadline)
+            VStack(alignment: .leading) {
+                Text(product.name).font(.title)
+                Text(product.descrip)
+                    .font(.subheadline)
+                    .foregroundColor(.red)
+                Text("$ \(String(format: "%0.2f", product.precio))").font(.subheadline)
             }
-            .padding(15)
-            Image(systemName: "plus.circle")
-                .resizable()
-                .foregroundColor(Color.black.opacity(0.6))
-                .frame(width: 50, height: 50)
-                .padding(10)
-            
             Spacer()
+            // Botón para agregar al carrito
+            Button(action: {
+                addToCart(product: product)
+            }) {
+                Image(systemName: "plus.circle")
+                    .resizable()
+                    .foregroundColor(Color.black.opacity(0.6))
+                    .frame(width: 50, height: 50)
+                    .padding(10)
+            }
         }
     }
-}
-struct RowViewProductOfertas_Previews: PreviewProvider {
-    static var previews: some View {
-        RowViewProductOfertas(productOfertas: ProductOfertas(id: 1, name: "Miel", descrip: "2X1 Miel de abeja, 250ml", avatar: Image("miel"), precio: 3.33)).previewLayout(.fixed(width: 400, height: 110))
+    
+    func addToCart(product: Product) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("Usuario no autenticado")
+            return
+        }
+
+        let db = Firestore.firestore()
+        db.collection("Carrito")
+            .whereField("userId", isEqualTo: userId)
+            .whereField("id", isEqualTo: product.id)
+            .getDocuments { (snapshot, error) in
+                if let snapshot = snapshot, !snapshot.isEmpty {
+                    // Si el producto ya existe, incrementa la cantidad
+                    for document in snapshot.documents {
+                        document.reference.updateData([
+                            "quantity": FieldValue.increment(Int64(1))
+                        ])
+                    }
+                } else {
+                    // Si no existe, agrégalo con cantidad inicial 1
+                    db.collection("Carrito").addDocument(data: product.toDictionary().merging([
+                        "userId": userId,
+                        "quantity": 1
+                    ]) { _, new in new }) { error in
+                        if let error = error {
+                            print("Error al agregar al carrito: \(error.localizedDescription)")
+                        } else {
+                            print("Producto agregado al carrito")
+                        }
+                    }
+                }
+            }
     }
 }
