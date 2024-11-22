@@ -16,9 +16,6 @@ struct Menu: View {
     @State private var isActiveLogin = false
     
     var body: some View {
-
-        NavigationView{
-            
             ZStack{
                 VStack{
                     //Imagen del menu
@@ -96,17 +93,16 @@ struct Menu: View {
                     NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito){
                         EmptyView()
                     }
-                    }
                 }//Fin Zstack
-            
+            }
             .navigationTitle("Menu")
+            .navigationBarBackButtonHidden(true)
             .toolbar{
                 Button("Cerrar sesión"){
+                    authenticationViewModel.messageError = nil
                     authenticationViewModel.logout()
                 }
             }
-            }//Fin Navigation View
-            
         }//Fin body
     
     //Navega a Ofertas del dia al dar click en el boton y asi respectivamente

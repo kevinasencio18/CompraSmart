@@ -27,10 +27,12 @@ struct CompraSmartApp: App {
     
     var body: some Scene {
         WindowGroup {
+            NavigationView{
             if let user = authenticationViewModel.user {
                 Menu(authenticationViewModel: authenticationViewModel)
             }else{
                 ContentView(authenticationViewModel: authenticationViewModel)
+            }
             }
         }
     }

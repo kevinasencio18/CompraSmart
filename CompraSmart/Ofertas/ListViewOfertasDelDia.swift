@@ -15,12 +15,10 @@ struct ListViewOfertasDelDia: View {
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
     var body: some View {
         
-        NavigationView{
         List(productsOfertas, id: \.id){ productOfertas in
             RowViewProductOfertas(productOfertas: productOfertas)
         }
         .navigationBarTitle("Ofertas del días:")
-        }
     }
 }
 

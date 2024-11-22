@@ -16,7 +16,6 @@ struct ListViewProductos: View {
     @State var isActiveCarrito = false
 
     var body: some View {
-        NavigationView {
             VStack {
                 List(products, id: \.id) { product in
                     RowViewProduct(product: product)
@@ -32,7 +31,6 @@ struct ListViewProductos: View {
                 }
             }
         }
-    }
 }
 
 struct ListViewProductos_Previews: PreviewProvider {

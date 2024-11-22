@@ -8,10 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C07B39A2CEFC58600F44ACD /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C07B3992CEFC58600F44ACD /* CartView.swift */; };
-		0C08A5A92C9B3587006C415C /* ListViewCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5A82C9B3587006C415C /* ListViewCarrito.swift */; };
 		0C08A5AE2C9B35C3006C415C /* ListViewOfertasDelDia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5AD2C9B35C3006C415C /* ListViewOfertasDelDia.swift */; };
-		0C08A5B32C9B360B006C415C /* ProductCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5B22C9B360B006C415C /* ProductCarrito.swift */; };
-		0C08A5B82C9B366B006C415C /* RowViewProductCarrito.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5B72C9B366B006C415C /* RowViewProductCarrito.swift */; };
 		0C08A5C02C9B4505006C415C /* ProductOfertas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5BF2C9B4505006C415C /* ProductOfertas.swift */; };
 		0C08A5C52C9B4538006C415C /* RowViewProductOfertas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5C42C9B4538006C415C /* RowViewProductOfertas.swift */; };
 		0C08A5CD2C9B4D63006C415C /* RegistrarTarjeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C08A5CC2C9B4D63006C415C /* RegistrarTarjeta.swift */; };
@@ -58,10 +55,7 @@
 
 /* Begin PBXFileReference section */
 		0C07B3992CEFC58600F44ACD /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
-		0C08A5A82C9B3587006C415C /* ListViewCarrito.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewCarrito.swift; sourceTree = "<group>"; };
 		0C08A5AD2C9B35C3006C415C /* ListViewOfertasDelDia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewOfertasDelDia.swift; sourceTree = "<group>"; };
-		0C08A5B22C9B360B006C415C /* ProductCarrito.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCarrito.swift; sourceTree = "<group>"; };
-		0C08A5B72C9B366B006C415C /* RowViewProductCarrito.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewProductCarrito.swift; sourceTree = "<group>"; };
 		0C08A5BF2C9B4505006C415C /* ProductOfertas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductOfertas.swift; sourceTree = "<group>"; };
 		0C08A5C42C9B4538006C415C /* RowViewProductOfertas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowViewProductOfertas.swift; sourceTree = "<group>"; };
 		0C08A5CC2C9B4D63006C415C /* RegistrarTarjeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrarTarjeta.swift; sourceTree = "<group>"; };
@@ -229,9 +223,6 @@
 			isa = PBXGroup;
 			children = (
 				0C07B3992CEFC58600F44ACD /* CartView.swift */,
-				0C08A5B22C9B360B006C415C /* ProductCarrito.swift */,
-				0C08A5A82C9B3587006C415C /* ListViewCarrito.swift */,
-				0C08A5B72C9B366B006C415C /* RowViewProductCarrito.swift */,
 			);
 			path = Carrito;
 			sourceTree = "<group>";
@@ -397,17 +388,14 @@
 				0C08A5C02C9B4505006C415C /* ProductOfertas.swift in Sources */,
 				0C1E133F2CEBCB84007011A2 /* AuthenticationRepository.swift in Sources */,
 				0C08A5C52C9B4538006C415C /* RowViewProductOfertas.swift in Sources */,
-				0C08A5B82C9B366B006C415C /* RowViewProductCarrito.swift in Sources */,
 				0CD068F32C9A099400054C01 /* Product.swift in Sources */,
 				0C1E13442CEBCD03007011A2 /* AuthenticationViewModel.swift in Sources */,
 				0CD068FD2C9A30B200054C01 /* ListViewProductos.swift in Sources */,
 				0C1D2A132C98B4F100B08865 /* Login.swift in Sources */,
 				0C07B39A2CEFC58600F44ACD /* CartView.swift in Sources */,
 				0C1D29E72C98B3E200B08865 /* ContentView.swift in Sources */,
-				0C08A5A92C9B3587006C415C /* ListViewCarrito.swift in Sources */,
 				0C08A5CD2C9B4D63006C415C /* RegistrarTarjeta.swift in Sources */,
 				0C1D29E52C98B3E200B08865 /* CompraSmartApp.swift in Sources */,
-				0C08A5B32C9B360B006C415C /* ProductCarrito.swift in Sources */,
 				0CD068F82C9A0A4800054C01 /* RowViewProduct.swift in Sources */,
 				0C1E133A2CEBC83B007011A2 /* AuthenticationFirebaseDatasource.swift in Sources */,
 				0C08A5AE2C9B35C3006C415C /* ListViewOfertasDelDia.swift in Sources */,

@@ -17,7 +17,6 @@ struct Login: View {
     @State private var isActiveMenu = false
     
     var body: some View {
-        NavigationView{
             ZStack{
                 VStack{
                     ZStack{
@@ -53,12 +52,6 @@ struct Login: View {
                     .shadow(radius: 5 )
                     
                     NavigationLink(destination: Registro(authenticationViewModel: authenticationViewModel)){
-                        Text("Olvidé mi contraseña")
-                            .foregroundColor(Color.blue)
-                            .underline()
-                            .padding()
-                    }
-                    NavigationLink(destination: Registro(authenticationViewModel: authenticationViewModel)){
                         Text("¿No tienes una cuenta? Regístrate")
                             .foregroundColor(Color.blue)
                             .underline()
@@ -67,6 +60,7 @@ struct Login: View {
                     NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
                         EmptyView()
                     }
+                    
                     if let messageError = authenticationViewModel.messageError{
                         Text("\(messageError) ‼️")
                             .bold()
@@ -76,12 +70,13 @@ struct Login: View {
                     }
                 }
             }
-            .navigationTitle("Bienvenido")
+            .navigationTitle("¡Bienvenido!🏆")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true)
         }
         
     }
 
-}
 //Prueba commit 2
 
 struct Login_Previews: PreviewProvider {

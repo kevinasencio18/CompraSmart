@@ -18,7 +18,6 @@ struct RegistrarTarjeta: View {
     @State private var isActiveMenu = false
     
     var body: some View {
-        NavigationView{
             VStack{
                 Image("registrarTargeta")
                     .resizable()
@@ -70,7 +69,7 @@ struct RegistrarTarjeta: View {
             }
             .navigationTitle("Registro de Tarjeta")
         }
-    }
+    
     
     func verificarDatos(noTarjeta: String,fechaVencimiento: String,codigoTarjeta: String){
         if !noTarjeta.isEmpty && !codigoTarjeta.isEmpty && !codigoTarjeta.isEmpty{

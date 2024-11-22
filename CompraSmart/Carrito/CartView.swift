@@ -12,7 +12,6 @@ struct CartView: View {
     }
 
     var body: some View {
-        NavigationView {
             VStack {
                 if isLoading {
                     ProgressView("Cargando...")
@@ -67,7 +66,6 @@ struct CartView: View {
                     .padding()
                 }
             }
-        }
         .onAppear {
             fetchCartItems()
         }

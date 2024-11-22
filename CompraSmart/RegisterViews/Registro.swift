@@ -24,7 +24,7 @@ struct Registro: View {
     
     
     var body: some View {
-        NavigationView{
+        
             ZStack{
                 VStack{
                     
@@ -101,7 +101,7 @@ struct Registro: View {
                         EmptyView()
                     }
                 }
-            }
+            
 //            .toolbar{
 //                ToolbarItem(placement: .navigationBarLeading){
 //                    Button(action: {
