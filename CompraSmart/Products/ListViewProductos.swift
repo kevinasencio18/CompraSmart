@@ -11,7 +11,9 @@ private let products = [
 ]
 
 struct ListViewProductos: View {
+    
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
+    @State var isActiveCarrito = false
 
     var body: some View {
         NavigationView {
@@ -19,22 +21,16 @@ struct ListViewProductos: View {
                 List(products, id: \.id) { product in
                     RowViewProduct(product: product)
                 }
-                if Auth.auth().currentUser != nil {
-                    NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel)) {
-                        Text("Ver Carrito")
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(8)
+                    NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito) {
+                        EmptyView()
                     }
-                    .padding()
-                } else {
-                    Text("Inicia sesión para ver tu carrito.")
-                        .foregroundColor(.red)
-                        .padding()
-                }
             }
             .navigationBarTitle("Lista de Productos:")
+            .toolbar{
+                Button("Ver Carrito"){
+                    isActiveCarrito = true
+                }
+            }
         }
     }
 }

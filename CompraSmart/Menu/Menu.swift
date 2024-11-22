@@ -93,7 +93,7 @@ struct Menu: View {
                     NavigationLink(destination: ListViewOfertasDelDia(authenticationViewModel: authenticationViewModel), isActive: $isActiveOfertasDelDia){
                         EmptyView()
                     }
-                    NavigationLink(destination: ListViewCarrito(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito){
+                    NavigationLink(destination: CartView(authenticationViewModel: authenticationViewModel), isActive: $isActiveCarrito){
                         EmptyView()
                     }
                     }

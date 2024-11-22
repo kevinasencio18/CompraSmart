@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-struct RegistrarTargeta: View {
+let carrito = CartView(authenticationViewModel: AuthenticationViewModel())
+
+struct RegistrarTarjeta: View {
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
-    @State private var noTargeta = ""
+    @State private var noTarjeta = ""
     @State private var fechaVencimiento = ""
-    @State private var codigoTargeta = ""
+    @State private var codigoTarjeta = ""
     @State private var camposVacios = false
     @State private var isActiveMenu = false
     
@@ -28,7 +30,7 @@ struct RegistrarTargeta: View {
                     .bold()
                     .padding()
                 
-                TextField("Número de Targeta", text: $noTargeta)
+                TextField("Número de Tarjeta", text: $noTarjeta)
                     .padding()
                     .frame(width: 300, height: 50)
                     .background(Color.black.opacity(0.05))
@@ -43,7 +45,7 @@ struct RegistrarTargeta: View {
                     .border(camposVacios ? .red: Color.clear, width: 2)
                     .border(camposVacios ? .red: Color.clear, width: 2)
                 
-                SecureField("Pin: ***", text: $codigoTargeta)
+                SecureField("Pin: ***", text: $codigoTarjeta)
                     .padding()
                     .frame(width: 150, height: 50)
                     .background(Color.black.opacity(0.05))
@@ -51,9 +53,9 @@ struct RegistrarTargeta: View {
                     .border(camposVacios ? .red: Color.clear, width: 2)
                 }.padding(5)
     
-                Button("Quitar Targeta"){
+                Button("Efectuar Pago"){
                     //Agregar la acion para el boton
-                    verificarDatos(noTargeta: noTargeta, fechaVencimiento: fechaVencimiento, codigoTargeta: codigoTargeta)
+                    verificarDatos(noTarjeta: noTarjeta, fechaVencimiento: fechaVencimiento, codigoTarjeta: codigoTarjeta)
                 }
                 .foregroundColor(.white)
                 .frame(width: 300, height: 50)
@@ -62,62 +64,30 @@ struct RegistrarTargeta: View {
                 .shadow(radius: 5 )
                 .padding(3)
                 
-                Button("Actualizar Targeta"){
-                    //Agregar la acion para el boton
-                    verificarDatos(noTargeta: noTargeta, fechaVencimiento: fechaVencimiento, codigoTargeta: codigoTargeta)
-                }
-                .foregroundColor(.white)
-                .frame(width: 300, height: 50)
-                .background(Color.blue)
-                .cornerRadius(10)
-                .shadow(radius: 5 )
-                .padding(3)
-                
-                Button("Guardar Targeta"){
-                    //Agregar la acion para el boton
-                    verificarDatos(noTargeta: noTargeta, fechaVencimiento: fechaVencimiento, codigoTargeta: codigoTargeta)
-                }
-                .foregroundColor(.white)
-                .frame(width: 300, height: 50)
-                .background(Color.blue)
-                .cornerRadius(10)
-                .shadow(radius: 5 )
-                .padding(3)
-            }
-            .toolbar{
-                ToolbarItem(placement: .navigationBarLeading){
-                    Button(action: {
-                        isActiveMenu = true
-                        irMenu()
-                    }, label: {
-                        Image(systemName: "arrow.left")
-                    })
+                NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
+                    EmptyView()
                 }
             }
-            .navigationTitle("Registro de Targeta")
+            .navigationTitle("Registro de Tarjeta")
         }
     }
     
-    func verificarDatos(noTargeta: String,fechaVencimiento: String,codigoTargeta: String){
-        if !noTargeta.isEmpty && !codigoTargeta.isEmpty && !codigoTargeta.isEmpty{
-            isActiveMenu = true
+    func verificarDatos(noTarjeta: String,fechaVencimiento: String,codigoTarjeta: String){
+        if !noTarjeta.isEmpty && !codigoTarjeta.isEmpty && !codigoTarjeta.isEmpty{
             camposVacios = false
             irMenu()
         }else{
-            isActiveMenu = false
             camposVacios = true
         }
     }
     func irMenu(){
-        NavigationLink(destination: Menu(authenticationViewModel: authenticationViewModel), isActive: $isActiveMenu){
-            Text("")
-                .foregroundColor(.clear)
-        }
+        carrito.clearCart()
+        isActiveMenu=true
     }
 }
 
 struct RegistrarTargeta_Previews: PreviewProvider {
     static var previews: some View {
-        RegistrarTargeta(authenticationViewModel: AuthenticationViewModel())
+        RegistrarTarjeta(authenticationViewModel: AuthenticationViewModel())
     }
 }

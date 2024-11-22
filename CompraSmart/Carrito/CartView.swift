@@ -4,6 +4,7 @@ import Firebase
 struct CartView: View {
     @State private var cartItems: [ProductCart] = []
     @State private var isLoading = true
+    @State var isActiveTarjeta = false
     @ObservedObject var authenticationViewModel: AuthenticationViewModel
 
     var totalPrice: Double {
@@ -22,71 +23,44 @@ struct CartView: View {
                 } else {
                     List {
                         ForEach(cartItems, id: \.id) { item in
-                            HStack {
-                                Image(item.avatarName)
-                                    .resizable()
-                                    .frame(width: 100, height: 100)
-                                    .padding(10)
-                                VStack(alignment: .leading) {
-                                    Text(item.name).font(.title)
-                                    Text(item.descrip).font(.subheadline)
-                                    Text("$ \(String(format: "%0.2f", item.precio))").font(.subheadline)
-                                    Text("Cantidad: \(item.quantity)").font(.subheadline)
-                                }
-                                Spacer()
-                                // Botones para aumentar o disminuir la cantidad
-                                VStack {
-                                    Button(action: {
-                                        updateQuantity(for: item, increment: 1)
-                                    }) {
-                                        Image(systemName: "plus.circle")
-                                            .foregroundColor(.green)
-                                            .frame(width: 30, height: 30)
-                                    }
-                                    Button(action: {
-                                        updateQuantity(for: item, increment: -1)
-                                    }) {
-                                        Image(systemName: "minus.circle")
-                                            .foregroundColor(.red)
-                                            .frame(width: 30, height: 30)
-                                    }
-                                }
-                                // Botón para eliminar el producto
-                                Button(action: {
-                                    removeItem(item)
-                                }) {
-                                    Image(systemName: "trash")
-                                        .foregroundColor(.red)
-                                        .frame(width: 30, height: 30)
-                                }
-                            }
+                            CartItemRow(item: item,
+                                      onIncrement: { updateQuantity(for: item, increment: 1) },
+                                      onDecrement: { updateQuantity(for: item, increment: -1) },
+                                      onDelete: { removeItem(item) })
+                                .listRowInsets(EdgeInsets())
+                                .buttonStyle(PlainButtonStyle())
                         }
                     }
-                    .navigationTitle("Carrito")
+                    .listStyle(PlainListStyle())
+                    .navigationTitle("Carrito:")
 
-                    // Total a pagar y botones
+                    NavigationLink(destination: RegistrarTarjeta(authenticationViewModel: authenticationViewModel), isActive: $isActiveTarjeta){
+                        EmptyView()
+                    }
+                    
                     VStack {
-                        Text("Total a Pagar: $ \(String(format: "%0.2f", totalPrice))")
+                        Text("Total a Pagar:  $\(String(format: "%0.2f", totalPrice))")
                             .font(.title2)
-                            .padding()
                         HStack {
                             Button(action: {
                                 clearCart()
                             }) {
                                 Text("Eliminar Carrito")
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.red)
+                                    .frame(width: 165, height: 50)
+                                    .background(Color(UIColor(hex: "#D12312")!))
                                     .cornerRadius(8)
+                                    
                             }
                             Button(action: {
                                 payCart()
                             }) {
                                 Text("Pagar")
                                     .foregroundColor(.white)
-                                    .padding()
-                                    .background(Color.green)
+                                    .frame(width: 165, height: 50)
+                                    .background(Color(UIColor(hex: "#359124")!))
                                     .cornerRadius(8)
+                                    
                             }
                         }
                     }
@@ -96,6 +70,58 @@ struct CartView: View {
         }
         .onAppear {
             fetchCartItems()
+        }
+    }
+
+    // Componente separado para cada fila del carrito
+    struct CartItemRow: View {
+        let item: ProductCart
+        let onIncrement: () -> Void
+        let onDecrement: () -> Void
+        let onDelete: () -> Void
+
+        var body: some View {
+            HStack {
+                Image(item.avatarName)
+                    .resizable()
+                    .frame(width: 100, height: 100)
+                    .padding(10)
+                
+                VStack(alignment: .leading) {
+                    Text(item.name).font(.title)
+                    Text(item.descrip).font(.subheadline)
+                    Text("$ \(String(format: "%0.2f", item.precio))").font(.subheadline)
+                    Text("Cantidad: \(item.quantity)").font(.subheadline)
+                }
+                
+                Spacer()
+                
+                VStack {
+                    Button(action: onIncrement) {
+                        Image(systemName: "plus.circle")
+                            .foregroundColor(.green)
+                            .frame(width: 30, height: 30)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                    
+                    Button(action: onDecrement) {
+                        Image(systemName: "minus.circle")
+                            .foregroundColor(.red)
+                            .frame(width: 30, height: 30)
+                    }
+                    .buttonStyle(BorderlessButtonStyle())
+                }
+                .padding(.horizontal, 8)
+                
+                Button(action: onDelete) {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .frame(width: 30, height: 30)
+                }
+                .buttonStyle(BorderlessButtonStyle())
+                .padding(.trailing, 16)
+            }
+            .contentShape(Rectangle())
         }
     }
 
@@ -200,5 +226,6 @@ struct CartView: View {
     // Función para pagar (simulación)
     func payCart() {
         print("Pago realizado. Total: $\(String(format: "%0.2f", totalPrice))")
+        isActiveTarjeta = true
     }
 }
