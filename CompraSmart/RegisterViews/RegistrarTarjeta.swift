@@ -71,14 +71,19 @@ struct RegistrarTarjeta: View {
         }
     
     
-    func verificarDatos(noTarjeta: String,fechaVencimiento: String,codigoTarjeta: String){
-        if !noTarjeta.isEmpty && !codigoTarjeta.isEmpty && !codigoTarjeta.isEmpty{
+    func verificarDatos(noTarjeta: String, fechaVencimiento: String, codigoTarjeta: String) {
+        if !noTarjeta.isEmpty && !fechaVencimiento.isEmpty && !codigoTarjeta.isEmpty {
             camposVacios = false
-            irMenu()
-        }else{
+            
+            // Mover la acción de ir al menú a un hilo de fondo
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.irMenu()
+            }
+        } else {
             camposVacios = true
         }
     }
+
     func irMenu(){
         carrito.clearCart()
         isActiveMenu=true

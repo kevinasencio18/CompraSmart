@@ -4,7 +4,8 @@
 //
 //  Created by MacOsX on 9/16/24.
 //
-
+// asenciok70@gmail.com
+// navidad2024@gmail.com
 import SwiftUI
 
 struct Login: View {

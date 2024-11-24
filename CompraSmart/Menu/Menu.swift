@@ -3,8 +3,7 @@
 //  CompraSmart
 //
 //  Created by MacOsX on 9/17/24.
-//
-// asenciok70@gmail.com
+
 import SwiftUI
 
 struct Menu: View {
